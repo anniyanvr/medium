@@ -1,0 +1,24 @@
+{
+    "type": "mysql",
+    "host": "<mysql rds cluster>.rds.amazonaws.com",
+    "port": 3306,
+    "username": "<username>",
+    "password": "<password>",
+    "database": "<schema>",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+        "dist/entity/**/*.ts"
+    ],
+    "migrations": [
+        "src/migration/**/*.ts"
+    ],
+    "subscribers": [
+        "src/subscriber/**/*.ts"
+    ],
+    "cli": {
+        "entitiesDir": "src/entity",
+        "migrationsDir": "src/migration",
+        "subscribersDir": "src/subscriber"
+    }
+}
