@@ -11,6 +11,9 @@ This repository contains a Dockerfile to set up a DeepSpeech server
 # Docker run command
  docker run -d -p 8000:4242 deepspeech-server-docker:latest
 
+# Audio Files  
+ Support well for 16bit 16Khz - Wav formats
+
 # Curl - To test speech to text via API
  curl -v  --header "Content-Type:application/octet-stream" -X POST --data-binary @yes.wav http://localhost:8000/transcribe
 
