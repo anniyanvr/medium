@@ -19,7 +19,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6
 
 RUN apt-get update
 
-RUN apt-get install -y sudo curl python3 python3-pip ffmpeg
+RUN apt-get install -y sudo curl python3 python3-pip ffmpeg sox libsox-fmt-mp3
 
 COPY requirements.txt requirements.txt
 
