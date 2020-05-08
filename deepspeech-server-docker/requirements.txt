@@ -1,0 +1,2 @@
+klein===19.6.0
+deepspeech===0.6.1
