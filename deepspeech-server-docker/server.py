@@ -142,10 +142,11 @@ def runDeepspeech(audiofile):
             "models/lm.binary",
             "--trie",
             "models/trie",
-            "--alphabet",
-            "models/alphabet.txt",
+           # "--alphabet",
+           # "models/alphabet.txt",
             "--audio",
             audiofile,
+            "--json",
         ],
         stdout=PIPE, stderr=PIPE
     )
