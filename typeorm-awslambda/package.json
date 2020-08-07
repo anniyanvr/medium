@@ -11,7 +11,7 @@
     "dependencies": {
         "aws-lambda": "^1.0.5",
         "aws-serverless-express": "^3.3.6",
-        "class-transformer": "^0.2.0",
+        "class-transformer": "^0.3.1",
         "express": "^4.17.1",
         "mysql": "^2.14.1",
         "node-fetch": "^2.6.0",
