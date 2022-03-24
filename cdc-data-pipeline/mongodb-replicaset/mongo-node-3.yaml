@@ -1,0 +1,50 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-node-3
+  labels:
+    name: mongo-node-3
+spec:
+  type: NodePort
+  ports:
+  - port: 27017
+    targetPort: 27017
+    protocol: TCP
+    name: mongo-node-3
+  selector:
+    name: mongo-node-3
+    
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: mongo-node-3-rc
+  labels:
+    name: mongo-node-3-rc
+spec:
+  replicas: 1
+  selector:
+    name: mongo-node-3
+  template:
+    metadata:
+      labels:
+        name: mongo-node-3
+    spec:
+      containers:
+      - name: mongo-node-3
+        image: mongo
+        command:
+          - mongod
+          - "--replSet"
+          - rs0
+          - "--bind_ip_all"
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+          - name: mongo-node-3-db
+            mountPath: /data/mongo-node-3/db
+      volumes:
+        - name: mongo-node-3-db
+          persistentVolumeClaim:
+            claimName: poc-app-pvc

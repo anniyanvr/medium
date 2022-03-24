@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restheart
+  #labels:
+  #  app: restheart
+spec:
+        #serviceName: restheart-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: restheart
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: restheart
+    spec:
+      containers:
+      - name: restheart
+        image: softinstigate/restheart
+        #command:
+        #- "--envFile /opt/restheart/etc/default.properties"
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+          - name: MONGO_URI
+            value: "mongodb://<username>:<password>@mongo-node-1:27017"
+          - name: root-mongo-resource
+            value: "/mongo_dev" 
+          - name: ROOT_MONGO_RESOURCE
+            value: "/mongo_dev"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/restheart/etc/default.properties
+          subPath: default.properties
+      volumes:
+        - name: config-volume
+          configMap:
+            name: restheart-default

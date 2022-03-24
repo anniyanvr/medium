@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debezium-kafka-connect
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: debezium-kafka-connect
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: debezium-kafka-connect
+    spec:
+      containers:
+      - name: debezium-kafka-connect
+        image: debezium/connect
+        ports:
+        - containerPort: 8083
+          protocol: TCP
+        env:
+          - name: BOOTSTRAP_SERVERS
+            value: kafka-cluster-kafka-bootstrap:9092
+          - name: GROUP_ID
+            value: "1"
+          - name: CONFIG_STORAGE_TOPIC
+            value: connect-cluster-configs
+          - name: OFFSET_STORAGE_TOPIC
+            value: connect-cluster-offsets
+          - name: STATUS_STORAGE_TOPIC
+            value: connect-cluster-status
+          - name: CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR
+            value: "-1"
+          - name: CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR 
+            value: "-1"
+          - name: CONNECT_STATUS_STORAGE_REPLICATION_FACTOR 
+            value: "-1"
+          - name: CONFIG_STORAGE_REPLICATION_FACTOR
+            value: "-1"
+          - name: CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR
+            value: "-1"
+          - name: CONNECT_STATUS_STORAGE_REPLICATION_FACTOR
+            value: "-1"
